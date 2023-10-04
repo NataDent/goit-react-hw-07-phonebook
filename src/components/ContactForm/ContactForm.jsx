@@ -10,7 +10,7 @@ import {
 } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
-import { getContacts } from 'redux/contactSelectors';
+import { getContacts } from 'redux/contactsSelectors';
 
 const contactSchema = Yup.object().shape({
   name: Yup.string().min(2, 'Too short!').required('Required'),
@@ -26,8 +26,30 @@ const contactSchema = Yup.object().shape({
 
 export const ContactForm = () => {
   const contacts = useSelector(getContacts);
-
   const dispatch = useDispatch();
+
+  const handleSubmit = evt => {
+    evt.preventdefault();
+    const form = evt.target;
+    const newContact = form.elements.text.value;
+    const existingName = contacts.find(
+      contact => contact.name === newContact.name
+    );
+    const existingNumber = contacts.find(
+      contact => contact.number === newContact.number
+    );
+
+    if (existingName) {
+      alert('Such name  already exists');
+      return;
+    }
+    if (existingNumber) {
+      alert('Such number already exists');
+      return;
+    }
+    dispatch(addContact(newContact));
+    form.reset();
+  };
 
   return (
     <FormWrapper>
@@ -37,25 +59,7 @@ export const ContactForm = () => {
           number: '',
         }}
         validationSchema={contactSchema}
-        onSubmit={(newContact, actions) => {
-          const existingName = contacts.find(
-            contact => contact.name === newContact.name
-          );
-          const existingNumber = contacts.find(
-            contact => contact.number === newContact.number
-          );
-
-          if (existingName) {
-            alert('Such name  already exists');
-            return;
-          }
-          if (existingNumber) {
-            alert('Such number already exists');
-            return;
-          }
-          dispatch(addContact(newContact));
-          actions.resetForm();
-        }}
+        onSubmit={handleSubmit}
       >
         <FormStyled>
           <FieldWrapper>

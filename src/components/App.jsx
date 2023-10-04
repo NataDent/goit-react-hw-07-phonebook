@@ -3,7 +3,7 @@ import { Filter } from './Filter/Filter';
 import { Section } from './Section/Section';
 import { ContactList } from './ContactList/ContactList';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/contactSelectors';
+import { getContacts } from 'redux/contactsSelectors';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
 import { getError, getIsLoading } from 'redux/contactsSelectors';

@@ -30,7 +30,9 @@ export const ContactForm = () => {
 
   const handleSubmit = evt => {
     evt.preventdefault();
+
     const form = evt.target;
+    console.log(form);
     const newContact = form.elements.text.value;
     const existingName = contacts.find(
       contact => contact.name === newContact.name

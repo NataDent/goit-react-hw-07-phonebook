@@ -26,7 +26,7 @@ export const App = () => {
       <Section title="Contacts">
         <Filter />
         {isLoading && !error && <b>Request in progress...</b>}
-        {contacts.length ? <ContactList /> : <p>No contacts</p>}
+        {contacts ? <ContactList /> : <p>No contacts</p>}
       </Section>
     </div>
   );

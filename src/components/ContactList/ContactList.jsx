@@ -1,16 +1,13 @@
-import { getContacts, getFilter } from 'redux/contactsSelectors';
+import { selectFilteredContacts } from 'redux/selectors';
 import { Button, ContactListStyled, ListItem } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/operations';
 
 export const ContactList = ({ id }) => {
-  const contacts = useSelector(getContacts);
-  const filterValue = useSelector(getFilter);
   const dispatch = useDispatch();
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.includes(filterValue)
-  );
+  const filteredContacts = useSelector(selectFilteredContacts);
+
   const handleDelete = () => dispatch(deleteContact(id));
 
   return (

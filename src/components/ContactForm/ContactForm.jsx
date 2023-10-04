@@ -28,12 +28,7 @@ export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
-  const handleSubmit = evt => {
-    evt.preventdefault();
-
-    const form = evt.target;
-    console.log(form);
-    const newContact = form.elements.text.value;
+  const handleSubmit = (newContact, actions) => {
     const existingName = contacts.find(
       contact => contact.name === newContact.name
     );
@@ -50,7 +45,7 @@ export const ContactForm = () => {
       return;
     }
     dispatch(addContact(newContact));
-    form.reset();
+    actions.resetForm();
   };
 
   return (

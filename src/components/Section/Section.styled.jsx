@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SectionWrapper = styled.section`
   max-width: 370px;
   margin: 0 auto;
-  margin-top: 60px;
+  margin: 32px auto;
   border: 1px solid lightgrey;
   border-radius: 8px;
   padding: 20px;

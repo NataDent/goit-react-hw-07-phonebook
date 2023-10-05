@@ -8,7 +8,7 @@ export const ContactList = ({ id }) => {
 
   const filteredContacts = useSelector(selectFilteredContacts);
 
-  const handleDelete = () => dispatch(deleteContact(id));
+  const handleDelete = id => dispatch(deleteContact(id));
 
   return (
     <ContactListStyled>
